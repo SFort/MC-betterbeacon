@@ -38,26 +38,17 @@ public class Beacon extends BlockEntity{
 		super(type);
 	}
 
+	//This does make the beacon check twice as process intensive so that's something.
 	@Inject(method = "updateLevel", at=@At("HEAD"),cancellable = true)
 	private void updateLevel(int x, int y, int z, CallbackInfo info) {
 		range=Config.add;
-		level = 0;
-		out:
-		for(int i = 1; i <= 4; this.level = i++) {
+		for(int i = 1; i <= 4; i++) {
 			int j = y - i;
 			if (j < 0) { break; }
-			for(int k = x - i; k <= x + i; ++k) {
-				for(int l = z - i; l <= z + i; ++l) {
-					BlockState state =this.world.getBlockState(new BlockPos(k, j, l));
-					range+= Config.additive.getOrDefault(state.getBlock(),0.0);
-					if (!state.isIn(BlockTags.BEACON_BASE_BLOCKS)) {
-						break out;
-					}
-				}
-			}
+			for(int k = x - i; k <= x + i; ++k)
+				for(int l = z - i; l <= z + i; ++l)
+					range+= Config.additive.getOrDefault(this.world.getBlockState(new BlockPos(k, j, l)).getBlock(),0.0);
 		}
-		System.out.println(range);
-		info.cancel();
 	}
 	/*
 	No clue what i fucked up with redirects again so gonna use a copy paste inject
