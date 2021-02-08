@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "betterbeacon",
+  "version": "${version}",
+
+  "name": "Better Beacons",
+  "description": "Configurable beacon range based on used blocks",
+  "authors": [
+    "SFort"
+  ],
+  "contact": {
+    "sources": "https://github.com/SFort/MC-betterbeacon"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "mixins": [
+    "betterbeacon.mixins.json"
+  ],
+"entrypoints": {
+  "main": ["tf.ssf.sfort.Config"]
+},
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "*"
+  }
+}

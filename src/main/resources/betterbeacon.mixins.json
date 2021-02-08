@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "tf.ssf.sfort.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "server": [
+    "Beacon"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
