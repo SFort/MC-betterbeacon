@@ -49,7 +49,7 @@ public class Config implements ModInitializer {
 			try{
 			String[] in = ls[4].split("\\s*;\\s*");
 			for (int i =0; i<in.length/2;++i) {
-				try{additive.put(Registry.BLOCK.get(new Identifier(in[i])),Double.parseDouble(in[i+1]));}catch (Exception ignore){}
+				try{additive.put(Registry.BLOCK.get(new Identifier(in[i*2])),Double.parseDouble(in[i*2+1]));}catch (Exception ignore){}
 			}}catch (Exception ignore){}
 			ls[4] = additive.keySet().stream().map(key -> Registry.BLOCK.getId(key).toString()+";"+additive.get(key).toString()).collect(Collectors.joining(";"));
 
