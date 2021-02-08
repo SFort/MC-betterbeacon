@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "tf.ssf.sfort.mixin",
   "compatibilityLevel": "JAVA_8",
-  "server": [
+  "mixins": [
     "Beacon"
   ],
   "injectors": {
