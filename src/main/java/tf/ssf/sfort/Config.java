@@ -35,7 +35,7 @@ public class Config implements ModInitializer {
 			List<String> defaultDesc = Arrays.asList(
 					"^-Default range  [10.0] 0.0 - ...",
 					"^-Added range per level  [10.0] 0.0 - ...",
-					"^-Added range per block of type [minecraft:iron_block;0.0;minecraft:gold_block;0.0;minecraft:diamond_block;1.0;minecraft:emerald_block;1.0;minecraft:netherite_block;2.0] ID;AMOUNT;..."
+					"^-Added range per block of type [minecraft:iron_block;0.0;minecraft:gold_block;0.0;minecraft:diamond_block;0.5;minecraft:emerald_block;0.5;minecraft:netherite_block;2.0] ID;AMOUNT;..."
 			);
 			String[] ls = la.toArray(new String[Math.max(la.size(), defaultDesc.size() * 2)|1]);
 			int hash = Arrays.hashCode(ls);
@@ -63,8 +63,8 @@ public class Config implements ModInitializer {
 	static {
 		additive.put(Blocks.IRON_BLOCK,0.0);
 		additive.put(Blocks.GOLD_BLOCK,0.0);
-		additive.put(Blocks.DIAMOND_BLOCK,1.0);
-		additive.put(Blocks.EMERALD_BLOCK,1.0);
+		additive.put(Blocks.DIAMOND_BLOCK,0.5);
+		additive.put(Blocks.EMERALD_BLOCK,0.5);
 		additive.put(Blocks.NETHERITE_BLOCK,2.0);
 	}
 }
