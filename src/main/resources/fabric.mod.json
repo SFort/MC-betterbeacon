@@ -19,7 +19,9 @@
     "betterbeacon.mixins.json"
   ],
 "entrypoints": {
-  "main": ["tf.ssf.sfort.Config"]
+  "main": [
+    "tf.ssf.sfort.betterbeacon.Config"
+  ]
 },
   "depends": {
     "fabricloader": "*",

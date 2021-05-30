@@ -1,4 +1,4 @@
-package tf.ssf.sfort.mixin;
+package tf.ssf.sfort.betterbeacon.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tf.ssf.sfort.Config;
+import tf.ssf.sfort.betterbeacon.Config;
 
 @Mixin(value = BeaconBlockEntity.class,priority = 4101)
 public class Beacon extends BlockEntity{
