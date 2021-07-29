@@ -4,7 +4,8 @@
   "package": "tf.ssf.sfort.betterbeacon.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "Beacon"
+    "Beacon",
+    "Conduit"
   ],
   "injectors": {
     "defaultRequire": 1

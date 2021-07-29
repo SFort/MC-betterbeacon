@@ -7,7 +7,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Dynamic;
-import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,7 +35,7 @@ public class Beacon extends BlockEntity implements BeaconAccessor{
 				if (j < 0) break;
 				for(int k = x - i; k <= x + i; ++k)
 					for(int l = z - i; l <= z + i; ++l)
-						((BeaconAccessor) entity).addRange(Config.additive.getOrDefault(world.getBlockState(new BlockPos(k, j, l)).getBlock(),0.0));
+						((BeaconAccessor) entity).addRange(Config.beacon_additive.getOrDefault(world.getBlockState(new BlockPos(k, j, l)).getBlock(),0.0));
 			}
 		}
 	}
