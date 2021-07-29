@@ -58,9 +58,9 @@ public class Config implements ModInitializer {
 			ls[4] = beacon_additive.keySet().stream().map(key -> Registry.BLOCK.getId(key)+";"+ beacon_additive.get(key).toString()).collect(Collectors.joining(";"));
 
 			try {
-				reset = Boolean.parseBoolean(ls[6]);
+				reset = !Boolean.parseBoolean(ls[6]);
 			}catch (Exception ignore){}
-			ls[6] = String.valueOf(reset);
+			ls[6] = String.valueOf(!reset);
 
 			try{
 				String[] in = ls[8].split("\\s*;\\s*");
