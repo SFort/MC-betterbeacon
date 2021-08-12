@@ -33,7 +33,7 @@ public class Conduit {
     @ModifyVariable(method = "givePlayersEffects(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Ljava/util/List;)V",
             at=@At(value = "STORE"),ordinal = 1)
     private static int changeRange(int i, World world, BlockPos pos, List<BlockPos> activatingBlocks){
-        if(Config.reset)i=0;
+        if(!Config.keep_vanilla)i=0;
         for(BlockPos p : activatingBlocks)
             i+=Config.conduit_additive.getOrDefault(world.getBlockState(p).getBlock(), 0.0);
         return i;

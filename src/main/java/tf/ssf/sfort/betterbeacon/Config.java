@@ -19,7 +19,7 @@ public class Config implements ModInitializer {
 	public static Logger LOGGER = LogManager.getLogger();
 	public static Map<Block, Double> beacon_additive = new LinkedHashMap<>();
 	public static Map<Block, Double> conduit_additive = new LinkedHashMap<>();
-	public static boolean reset = false;
+	public static boolean keep_vanilla = true;
 	public static List<Block> to_add = new LinkedList<>();
 	public static double add = 10.0;
 	public static double lvl_mul = 10.0;
@@ -58,9 +58,10 @@ public class Config implements ModInitializer {
 			ls[4] = beacon_additive.keySet().stream().map(key -> Registry.BLOCK.getId(key)+";"+ beacon_additive.get(key).toString()).collect(Collectors.joining(";"));
 
 			try {
-				reset = !Boolean.parseBoolean(ls[6]);
+				if(ls[6] != null)
+				keep_vanilla = Boolean.parseBoolean(ls[6]);
 			}catch (Exception ignore){}
-			ls[6] = String.valueOf(!reset);
+			ls[6] = String.valueOf(keep_vanilla);
 
 			try{
 				String[] in = ls[8].split("\\s*;\\s*");
