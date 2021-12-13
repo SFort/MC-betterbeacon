@@ -14,20 +14,19 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tf.ssf.sfort.betterbeacon.Config;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Mixin(value = ConduitBlockEntity.class,priority = 4101)
 public class Conduit {
+
     @Mutable @Final @Shadow
     private static Block[] ACTIVATING_BLOCKS;
 
     @Inject(method = "<clinit>", at=@At("TAIL"))
     private static void updateBlocks(CallbackInfo ci){
         if (Config.to_add.size()>0){
-            Block[] update = Arrays.copyOf(ACTIVATING_BLOCKS, ACTIVATING_BLOCKS.length+Config.to_add.size());
-            System.arraycopy(Config.to_add.toArray(Block[]::new),0, update, ACTIVATING_BLOCKS.length, Config.to_add.size());
-            ACTIVATING_BLOCKS=update;
+            Collections.addAll(Config.to_add, ACTIVATING_BLOCKS);
+            ACTIVATING_BLOCKS = Config.to_add.toArray(new Block[]{});
         }
     }
     @ModifyVariable(method = "givePlayersEffects(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Ljava/util/List;)V",

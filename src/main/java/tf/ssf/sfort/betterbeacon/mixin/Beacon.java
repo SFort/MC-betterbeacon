@@ -18,8 +18,7 @@ import tf.ssf.sfort.betterbeacon.Config;
 
 @Mixin(value = BeaconBlockEntity.class,priority = 4101)
 public class Beacon extends BlockEntity implements BeaconAccessor{
-	@Dynamic double range = 0.0;
-	@Shadow int level;
+	double betterbeacon$range = 0.0;
 
 	public Beacon(BlockPos pos, BlockState state) {
 		super(BlockEntityType.BEACON, pos, state);
@@ -50,14 +49,14 @@ public class Beacon extends BlockEntity implements BeaconAccessor{
 
 	@Override
 	public void addRange(double d) {
-		range+=d;
+		betterbeacon$range+=d;
 	}
 	@Override
 	public void resetRange() {
-		range=Config.add;
+		betterbeacon$range=Config.add;
 	}
 	@Override
 	public double getRange() {
-		return range;
+		return betterbeacon$range;
 	}
 }
