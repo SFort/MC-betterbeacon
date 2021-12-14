@@ -33,8 +33,9 @@ public class Conduit {
             at=@At(value = "STORE"),ordinal = 1)
     private static int changeRange(int i, World world, BlockPos pos, List<BlockPos> activatingBlocks){
         if(!Config.keep_vanilla)i=0;
+        double n = i;
         for(BlockPos p : activatingBlocks)
-            i+=Config.conduit_additive.getOrDefault(world.getBlockState(p).getBlock(), 0.0);
-        return i;
+            n+=Config.conduit_additive.getOrDefault(world.getBlockState(p).getBlock(), 0.0);
+        return (int) n;
     }
 }
