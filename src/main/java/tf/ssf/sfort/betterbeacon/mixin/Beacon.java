@@ -1,9 +1,11 @@
 package tf.ssf.sfort.betterbeacon.mixin;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -11,8 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import tf.ssf.sfort.betterbeacon.BeaconAccessor;
 import tf.ssf.sfort.betterbeacon.Config;
 
@@ -40,12 +42,13 @@ public class Beacon extends BlockEntity implements BeaconAccessor{
 	private static void removeUpdate(World world, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
 		betterbeacon$updatingBeacons.remove(new Vec3i(x, y, z));
 	}
-	@Inject(method = "updateLevel(Lnet/minecraft/world/World;III)I", locals=LocalCapture.CAPTURE_FAILHARD, at=@At(value="INVOKE", target="Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;"))
-	private static void updateLevel(World world, int x, int y, int z, CallbackInfoReturnable<Integer> cir, int i, int j, int k, boolean bl, int l, int m) {
+	@Redirect(method="updateLevel(Lnet/minecraft/world/World;III)I", at=@At(value="INVOKE", target="Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/tag/Tag;)Z"))
+	private static boolean updateLevel(BlockState instance, Tag<Block> tag, World world, int x, int y, int z) {
 		BeaconAccessor entity = betterbeacon$updatingBeacons.get(new Vec3i(x, y, z));
 		if (entity != null) {
-			entity.addRange(Config.beacon_additive.getOrDefault(world.getBlockState(new BlockPos(l, k, m)).getBlock(),0.0));
+			entity.addRange(Config.beacon_additive.getOrDefault(instance.getBlock(),0.0));
 		}
+		return instance.isIn(tag);
 	}
 
 	@ModifyVariable(method = "applyPlayerEffects(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;ILnet/minecraft/entity/effect/StatusEffect;Lnet/minecraft/entity/effect/StatusEffect;)V",at=@At(value = "STORE", ordinal = 0))
