@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -42,7 +42,7 @@ public class Beacon extends BlockEntity implements BeaconAccessor{
 	private static void removeUpdate(World world, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
 		betterbeacon$updatingBeacons.remove(new Vec3i(x, y, z));
 	}
-	@Redirect(method="updateLevel(Lnet/minecraft/world/World;III)I", at=@At(value="INVOKE", target="Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/tag/TagKey;)Z"))
+	@Redirect(method="updateLevel(Lnet/minecraft/world/World;III)I", at=@At(value="INVOKE", target="Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
 	private static boolean updateLevel(BlockState instance, TagKey<Block> tag, World world, int x, int y, int z) {
 		BeaconAccessor entity = betterbeacon$updatingBeacons.get(new Vec3i(x, y, z));
 		if (entity != null) {
