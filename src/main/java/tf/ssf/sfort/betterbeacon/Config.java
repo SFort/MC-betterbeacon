@@ -5,7 +5,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,9 +57,9 @@ public class Config implements ModInitializer {
 			String[] in = ls[i].split("\\s*;\\s*");
 			for (int j =0; j<in.length/2;++j) {
 				try{
-					beacon_additive.put(Registry.BLOCK.get(new Identifier(in[j*2])),Double.parseDouble(in[j*2+1]));}catch (Exception e){if(existing)LOGGER.log(Level.WARN, MOD_ID +" #"+i+"\n"+e);}
+					beacon_additive.put(Registries.BLOCK.get(new Identifier(in[j*2])),Double.parseDouble(in[j*2+1]));}catch (Exception e){if(existing)LOGGER.log(Level.WARN, MOD_ID +" #"+i+"\n"+e);}
 			}}catch (Exception e){if(existing)LOGGER.log(Level.WARN, MOD_ID +" #"+i+"\n"+e);}
-			ls[i] = beacon_additive.keySet().stream().map(key -> Registry.BLOCK.getId(key)+";"+ beacon_additive.get(key).toString()).collect(Collectors.joining(";"));
+			ls[i] = beacon_additive.keySet().stream().map(key -> Registries.BLOCK.getId(key)+";"+ beacon_additive.get(key).toString()).collect(Collectors.joining(";"));
 			i+=2;
 			try {
 				if(ls[i] != null)
@@ -71,12 +71,12 @@ public class Config implements ModInitializer {
 				String[] in = ls[i].split("\\s*;\\s*");
 				for (int j =0; j<in.length/2;++j) {
 					try{
-						Block id = Registry.BLOCK.get(new Identifier(in[j*2]));
+						Block id = Registries.BLOCK.get(new Identifier(in[j*2]));
 						conduit_additive.put(id,Double.parseDouble(in[j*2+1]));
 						to_add.add(id);
 					}catch (Exception e){if(existing)LOGGER.log(Level.WARN, MOD_ID +" #"+i+"\n"+e);}
 				}}catch (Exception e){if(existing)LOGGER.log(Level.WARN, MOD_ID +" #"+i+"\n"+e);}
-			ls[i] = conduit_additive.keySet().stream().map(key -> Registry.BLOCK.getId(key) +";"+ conduit_additive.get(key).toString()).collect(Collectors.joining(";"));
+			ls[i] = conduit_additive.keySet().stream().map(key -> Registries.BLOCK.getId(key) +";"+ conduit_additive.get(key).toString()).collect(Collectors.joining(";"));
 
 
 			if(hash != Arrays.hashCode(ls))
