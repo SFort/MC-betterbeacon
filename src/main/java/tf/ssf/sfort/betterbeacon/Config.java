@@ -81,9 +81,9 @@ public class Config implements ModInitializer {
 
 			if(hash != Arrays.hashCode(ls))
 				Files.write(confFile.toPath(), Arrays.asList(ls));
-			LOGGER.log(Level.INFO,"tf.ssf.sfort.beaconbalance successfully loaded config file");
+			LOGGER.log(Level.INFO,MOD_ID+" successfully loaded config file");
 		} catch(Exception e) {
-			LOGGER.log(Level.ERROR,"tf.ssf.sfort.beaconbalance failed to load config file, using defaults\n"+e);
+			LOGGER.log(Level.ERROR,MOD_ID+" failed to load config file, using defaults\n"+e);
 		}
 	}
 	static {
